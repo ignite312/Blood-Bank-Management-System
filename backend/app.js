@@ -1,33 +1,50 @@
+const express = require('express');
 const oracledb = require('oracledb');
+const cors = require('cors'); // Import the cors middleware
 
+const app = express();
+const port = 3000;
+
+// Configure your Oracle database connection details
 const dbConfig = {
   user: 's2020015640',
   password: 'db2023',
   connectString: '103.221.254.51:1521/pdbdbms2023.cse.du.ac.bd',
 };
 
-async function run() {
-  let connection;
+// Use the cors middleware to allow requests from a specific origin (e.g., http://localhost:3001)
+app.use(cors({ origin: 'http://localhost:3001' }));
 
-  try {
-    connection = await oracledb.getConnection(dbConfig);
-
-    // Perform database operations here
-
-    const result = await connection.execute('SELECT * FROM donor');
-
-    console.log(result.rows);
-
-  } catch (err) {
-    console.error(err);
-  } finally {
-    if (connection) {
-      await connection.close();
+app.get('/api/data-from-oracle', (req, res) => {
+  oracledb.getConnection(dbConfig, (err, connection) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send('Error connecting to Oracle database');
+      return;
     }
-  }
-}
 
-run();
+    // Execute an example query to fetch data from an Oracle table
+    connection.execute(
+      'SELECT * FROM donor',
+      (err, result) => {
+        if (err) {
+          console.error(err.message);
+          res.status(500).send('Error fetching data from Oracle');
+        } else {
+          res.json(result.rows);
+        }
 
+        // Release the connection
+        connection.close((err) => {
+          if (err) {
+            console.error(err.message);
+          }
+        });
+      }
+    );
+  });
+});
 
-
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
