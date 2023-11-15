@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import '../App.css';
 import '../styles.css';
 
-
 function UserDataInput({ onUserInput }) {
   const [userData, setUserData] = useState({
     id: '',
@@ -14,6 +13,8 @@ function UserDataInput({ onUserInput }) {
     email: '',
     donationCount: '',
   });
+  const [loading, setLoading] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,15 +24,69 @@ function UserDataInput({ onUserInput }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onUserInput(userData);
+
+    try {
+      setLoading(true);
+
+      const response = await fetch('http://localhost:3000/api/insert-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        console.log('Data successfully inserted into the database');
+        setSubmissionStatus('success');
+        // Optionally, reset the form or provide feedback to the user
+        setUserData({
+          id: '',
+          firstName: '',
+          lastName: '',
+          phone: '',
+          bloodType: '',
+          location: '',
+          email: '',
+          donationCount: '',
+        });
+        onUserInput(userData);
+      } else {
+        console.error('Failed to insert data into the database');
+        setSubmissionStatus('failure');
+        // Optionally, provide user-friendly error message or feedback
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setSubmissionStatus('failure');
+      // Optionally, provide user-friendly error message or feedback
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    const activeElement = document.activeElement;
+    const inputFields = Array.from(document.getElementsByTagName('input'));
+    const currentIndex = inputFields.indexOf(activeElement);
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const nextIndex = (currentIndex + 1) % inputFields.length;
+      inputFields[nextIndex].focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prevIndex = (currentIndex - 1 + inputFields.length) % inputFields.length;
+      inputFields[prevIndex].focus();
+    }
   };
 
   return (
     <div>
       <h2>Donor Information</h2>
-      <form onSubmit={handleSubmit} className="user-input-form">
+      <form onSubmit={handleSubmit} className="user-input-form" onKeyDown={handleKeyDown}>
         <div>
           <label htmlFor="id">ID:</label>
           <input
@@ -121,6 +176,3 @@ function UserDataInput({ onUserInput }) {
 }
 
 export default UserDataInput;
-
-
-

@@ -1,6 +1,6 @@
 const express = require('express');
 const oracledb = require('oracledb');
-const cors = require('cors'); // Import the cors middleware
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
@@ -14,35 +14,65 @@ const dbConfig = {
 
 // Use the cors middleware to allow requests from a specific origin (e.g., http://localhost:3001)
 app.use(cors({ origin: 'http://localhost:3001' }));
+app.use(express.json()); // Middleware to parse JSON request bodies
 
-app.get('/api/data-from-oracle', (req, res) => {
-  oracledb.getConnection(dbConfig, (err, connection) => {
-    if (err) {
-      console.error(err.message);
-      res.status(500).send('Error connecting to Oracle database');
-      return;
-    }
+// Route to fetch data from Oracle
+app.get('/api/data-from-oracle', async (req, res) => {
+  try {
+    const connection = await oracledb.getConnection(dbConfig);
 
     // Execute an example query to fetch data from an Oracle table
-    connection.execute(
-      'SELECT * FROM donor',
-      (err, result) => {
-        if (err) {
-          console.error(err.message);
-          res.status(500).send('Error fetching data from Oracle');
-        } else {
-          res.json(result.rows);
-        }
+    const result = await connection.execute('SELECT * FROM donor');
+    
+    res.json(result.rows);
 
-        // Release the connection
-        connection.close((err) => {
-          if (err) {
-            console.error(err.message);
-          }
-        });
-      }
-    );
-  });
+    // Release the connection
+    await connection.close();
+  } catch (err) {
+    console.error('Error fetching data from Oracle:', err.message);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Route to insert data into Oracle
+app.post('/api/insert-data', async (req, res) => {
+  try {
+    const { id, firstName, lastName, phone, bloodType, location, email, donationCount } = req.body;
+
+    // Ensure all required fields are present
+    if (!id || !firstName || !lastName || !phone || !bloodType || !location || !email || !donationCount) {
+      return res.status(400).json({ success: false, message: 'All fields are required' });
+    }
+
+    const connection = await oracledb.getConnection(dbConfig);
+
+    // Example query for data insertion (modify according to your database schema)
+    const query = `
+    INSERT INTO donor (DONORID, FIRSTNAME, LASTNAME, PHONENUMBER, BLOODGROUP, LOCATION, EMAIL, TOTALDONATIONCOUNT)
+    VALUES (:id, :firstName, :lastName, :phone, :bloodType, :location, :email, :donationCount)
+    `;
+
+    const bindParams = {
+      id,
+      firstName,
+      lastName,
+      phone,
+      bloodType,
+      location,
+      email,
+      donationCount,
+    };
+
+    const result = await connection.execute(query, bindParams, { autoCommit: true });
+
+    res.status(200).json({ success: true, message: 'Data successfully inserted into the database' });
+
+    // Release the connection
+    await connection.close();
+  } catch (error) {
+    console.error('Error inserting data into the database:', error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
 });
 
 app.listen(port, () => {
