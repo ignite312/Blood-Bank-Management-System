@@ -32,21 +32,21 @@ ul {
 .custom-button {
   margin: 10px;
   padding: 15px 30px; /* Customize button size */
-  background-color: #007BFF;
+  background-color: rgb(21, 18, 112);
   color: #fff;
-  font-size: 16px;
+  font-size: 12px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
 }
 
 .custom-button:hover {
-  background-color: #0056b3;
+  background-color: #b3004e;
 }
 
 .bigger-button {
-  padding: 20px 40px; /* Adjust the button size to make it larger */
-  font-size: 18px; /* Increase font size for larger text */
+  padding: 15px 40px; /* Adjust the button size to make it larger */
+  font-size: 13px; /* Increase font size for larger text */
 }
 /* styles.css */
 .rotating-logo {

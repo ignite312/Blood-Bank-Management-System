@@ -5,7 +5,6 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
-// Configure your Oracle database connection details
 const dbConfig = {
   user: 's2020015640',
   password: 'db2023',

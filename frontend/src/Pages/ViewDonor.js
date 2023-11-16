@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
-import '../styles.css'; // Include the styles.css file
+import '../styles.css';
 
 function BloodBankManagement() {
   const [data, setData] = useState([]);
