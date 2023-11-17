@@ -12,11 +12,17 @@ function HomePage() {
         <h1>Blood Management System</h1>
 
         <div className="button-container">
-          <Link to="/Dashboard" className="custom-button link-button">
-            View Information
+          <Link to="/Appointment" className="custom-button link-button">
+          Appointment
           </Link>
-          <Link to="/DataInput" className="custom-button link-button">
-            Data Input
+          <Link to="/Request" className="custom-button link-button">
+          Request Blood
+          </Link>
+          <Link to="/CreateID" className="custom-button link-button">
+            Create ID
+          </Link>
+          <Link to="/LoginStaff" className="custom-button link-button">
+          Login Staff
           </Link>
         </div>
       </div>

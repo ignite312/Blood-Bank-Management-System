@@ -1,20 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Dashboard from './Pages/Dashboard';
-import DataInput from './Pages/DataInput';
+import Appointment from './UserAccess/Appointment';
+import Request from './UserAccess/Request';
+import CreateID from './UserAccess/CreateID';
+import LoginStaff from './UserAccess/LoginStaff';
 import Home from './Pages/Home';
+
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
          <Route path="/" element={<Home />}/>
-          <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/DataInput" element={<DataInput />} />
+          <Route path="/Appointment" element={<Appointment />} />
+          <Route path="/Request" element={<Request />} />
+          <Route path="/CreateID" element={<CreateID />} />
+          <Route path="/LoginStaff" element={<LoginStaff />} />
         </Routes>
       </div>
     </Router>
   );
 }
-
 export default App;
