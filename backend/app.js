@@ -112,6 +112,7 @@ app.post('/api/insert-request', async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 });
+
 function generateRequestId() {
   const currentDate = new Date();
   const day = currentDate.getDate().toString().padStart(2, '0');
@@ -123,6 +124,43 @@ function generateRequestId() {
 
   return `${day}${month}${year}${hours}${minutes}${seconds}`;
 }
+
+// Route to insert data into the Appointment table
+app.post('/api/create-appointment', async (req, res) => {
+  try {
+    const { donor_id } = req.body;
+
+    // Ensure donor_id is present
+    if (!donor_id) {
+      return res.status(400).json({ success: false, message: 'Donor ID is required' });
+    }
+
+    const connection = await oracledb.getConnection(dbConfig);
+
+    // Automatically generate appointment_id based on the current date and time
+    const appointment_id = generateRequestId();
+
+    const query = `
+      INSERT INTO Appointment (appointment_id, donor_id, appointment_date, status)
+      VALUES (:appointment_id, :donor_id, SYSDATE, 'Pending')
+    `;
+
+    const bindParams = {
+      appointment_id,
+      donor_id,
+    };
+
+    const result = await connection.execute(query, bindParams, { autoCommit: true });
+
+    res.status(200).json({ success: true, message: 'Appointment data successfully inserted into the database' });
+
+    await connection.close();
+  } catch (error) {
+    console.error('Error inserting appointment data into the database:', error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

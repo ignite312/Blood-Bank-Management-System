@@ -4,6 +4,7 @@ import Appointment from './UserAccess/Appointment';
 import Request from './UserAccess/Request';
 import CreateID from './UserAccess/CreateID';
 import LoginStaff from './UserAccess/LoginStaff';
+import Dashboard from './Pages/Dashboard'
 import Home from './Pages/Home';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/Request" element={<Request />} />
           <Route path="/CreateID" element={<CreateID />} />
           <Route path="/LoginStaff" element={<LoginStaff />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </Router>

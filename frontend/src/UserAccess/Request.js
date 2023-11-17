@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import '../App.css';
 import '../styles.css';
+
 
 function RequestForm({ onFormSubmit }) {
   const [requestData, setRequestData] = useState({
@@ -68,8 +67,6 @@ function RequestForm({ onFormSubmit }) {
 
       if (response.ok) {
         console.log('Request data successfully inserted into the database');
-        // Display toast message for success
-        toast.success('Request data successfully inserted into the database');
         // Optionally, reset the form or provide feedback to the user
         setRequestData({
           patient_id: '',
