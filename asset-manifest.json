@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Blood-Bank-Management-System/static/css/main.9625649c.css",
+    "main.js": "/Blood-Bank-Management-System/static/js/main.102ba87c.js",
+    "static/js/787.9e9f4ffd.chunk.js": "/Blood-Bank-Management-System/static/js/787.9e9f4ffd.chunk.js",
+    "static/media/spectre.jpg": "/Blood-Bank-Management-System/static/media/spectre.8ec5d3f6e973934aa271.jpg",
+    "index.html": "/Blood-Bank-Management-System/index.html",
+    "main.9625649c.css.map": "/Blood-Bank-Management-System/static/css/main.9625649c.css.map",
+    "main.102ba87c.js.map": "/Blood-Bank-Management-System/static/js/main.102ba87c.js.map",
+    "787.9e9f4ffd.chunk.js.map": "/Blood-Bank-Management-System/static/js/787.9e9f4ffd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9625649c.css",
+    "static/js/main.102ba87c.js"
+  ]
+}
