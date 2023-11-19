@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../styles.css'; // Import the stylesheet
 
 function StaffLogin() {
   const [username, setUsername] = useState('');
@@ -26,7 +27,7 @@ function StaffLogin() {
       if (username && password) {
         console.log('Login successful');
         toast.success('Login successful');
-        
+
         // Redirect to the Dashboard component
         navigate('/Dashboard');
       } else {
@@ -40,7 +41,7 @@ function StaffLogin() {
   };
 
   return (
-    <div>
+    <div className="center-container">
       <h2>Staff Login</h2>
       <form onSubmit={handleSubmit} className="user-input-form">
         <div>

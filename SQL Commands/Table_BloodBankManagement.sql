@@ -28,22 +28,23 @@ CREATE TABLE Appointment (
 
 CREATE TABLE Donation (
   donation_id NUMBER PRIMARY KEY,
+  appointment_id NUMBER,
   donor_id NUMBER,
   donation_date DATE,
-  quantity NUMBER,
-  blood_group VARCHAR2(10),
-  FOREIGN KEY (donation_id) REFERENCES Appointment(appointment_id),
+  quantity NUMBER NOT NULL,
+  blood_group VARCHAR2(10) NOT NULL,
+  FOREIGN KEY (appointment_id) REFERENCES Appointment(appointment_id),
   FOREIGN KEY (donor_id) REFERENCES Person(person_id)
 );
 
 CREATE TABLE Inventory (
   inventory_id NUMBER PRIMARY KEY,
   donation_id NUMBER,
-  blood_group VARCHAR2(10),
-  quantity NUMBER,
+  blood_group VARCHAR2(10) NOT NULL,
+  quantity NUMBER NOT NULL,
   collection_date DATE,
-  expiry_date DATE,
-  status VARCHAR(15), -- Available/Reserved
+  expiry_date DATE NOT NULL,
+  status VARCHAR(15), -- Available/Reserved/Expired
   location VARCHAR(50),
   FOREIGN KEY (donation_id) REFERENCES Donation(donation_id)
 );
@@ -61,11 +62,12 @@ CREATE TABLE Request (
 
 CREATE TABLE Receive (
   receive_id NUMBER PRIMARY KEY,
+  request_id NUMBER,
   inventory_id NUMBER,
   receive_date DATE,
-  quantity NUMBER,
-  total_cost NUMBER,
-  FOREIGN KEY (receive_id) REFERENCES Request(request_id),
+  quantity NUMBER NOT NULL,
+  total_cost NUMBER NOT NULL,
+  FOREIGN KEY (request_id) REFERENCES Request(request_id),
   FOREIGN KEY (inventory_id) REFERENCES Inventory(inventory_id)
 );
 

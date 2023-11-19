@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles.css';
 import '../App.css';
-import logo from '../image/spectre.jpg';
+import logo from '../image/blood_donation.png';
 
 function HomePage() {
   return (
@@ -13,21 +13,20 @@ function HomePage() {
 
         <div className="button-container">
           <Link to="/Appointment" className="custom-button link-button">
-          Appointment
+            Appointment
           </Link>
           <Link to="/Request" className="custom-button link-button">
-          Request Blood
+            Request Blood
           </Link>
           <Link to="/CreateID" className="custom-button link-button">
             Create ID
           </Link>
           <Link to="/LoginStaff" className="custom-button link-button">
-          Login Staff
+            Login Staff
           </Link>
         </div>
       </div>
     </div>
   );
 }
-
 export default HomePage;

@@ -88,8 +88,8 @@ function RequestForm({ onFormSubmit }) {
   };
 
   return (
-    <div>
-      <h2>Request Information</h2>
+    <div className="center-container">
+      <h2>Request Blood</h2>
       <form onSubmit={handleSubmit} className="user-input-form">
         <div>
           <label htmlFor="patient_id">Patient ID:</label>

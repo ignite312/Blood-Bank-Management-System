@@ -1,0 +1,74 @@
+// https://dbdiagram.io/d
+Table Person {
+  person_id number [pk]
+  full_name varchar(50) [not null]
+  age number [not null]
+  gender varchar(10) [not null]
+  address varchar(100)
+  blood_group varchar(10)
+  phone_number varchar(15) [not null]
+  email varchar(100)
+  is_public_donor char(1)
+}
+
+Table HealthHistory {
+  checkup_id number [pk]
+  checkup_date date
+  medical_condition varchar(255)
+  person_id number [ref: > Person.person_id]
+}
+
+Table Appointment {
+  appointment_id number [pk]
+  appointment_date date
+  status varchar(15)
+  donor_id number [ref: > Person.person_id]
+}
+
+Table Donation {
+  donation_id number [pk]
+  donation_date date
+  quantity number
+  blood_group varchar(10)
+  appointment_id number [ref: - Appointment.appointment_id]
+  donor_id number [ref: > Person.person_id]
+}
+
+Table Inventory {
+  inventory_id number [pk]
+  blood_group varchar(10) [not null]
+  quantity number [not null]
+  collection_date date
+  expiry_date date [not null]
+  status varchar(15)
+  location varchar(50)
+  donation_id number [ref: - Donation.donation_id]
+}
+
+Table Request {
+  request_id number [pk]
+  request_date date
+  quantity number
+  status varchar(15)
+  blood_group varchar(10) [not null]
+  hospital_name varchar(100)
+  patient_id number [ref: > Person.person_id]
+}
+
+Table Receive {
+  receive_id number [pk]
+  receive_date date
+  quantity number [not null]
+  total_cost number [not null]
+  request_id number [ref: - Request.request_id]
+  inventory_id number [ref: > Inventory.inventory_id]
+}
+
+Table TransactionHistory {
+  transaction_id number [pk]
+  transaction_type varchar(50)
+  transaction_date date
+  quantity number
+  donation_id number [ref: > Donation.donation_id]
+  receive_id number [ref: - Receive.receive_id]
+}

@@ -46,7 +46,7 @@ function AppointmentForm({ onFormSubmit }) {
   };
 
   return (
-    <div>
+    <div className="center-container">
       <h2>Appointment Information</h2>
       <form onSubmit={handleSubmit} className="user-input-form">
         <div>

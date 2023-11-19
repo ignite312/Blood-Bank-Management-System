@@ -7,6 +7,10 @@
   width: 100px;
   height: 100px;
 }
+/* Add this CSS to your styles.css or another stylesheet file */
+.link-button {
+  text-decoration: none;
+}
 
 .App-link {
   color: #61dafb;
@@ -34,6 +38,24 @@
   border: none;
   cursor: pointer;
   border-radius: 5px;
+}
+/* Add this CSS to your styles.css or another stylesheet file */
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* 100% of the viewport height */
+}
+
+.user-input-form {
+  width: 300px; /* Adjust the width as needed */
+  text-align: center;
+  margin-top: 20px; /* Add some top margin for spacing */
+}
+
+.submit-button {
+  margin-top: 10px; /* Add some top margin for spacing */
 }
 
 .custom-button:hover {

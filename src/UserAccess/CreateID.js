@@ -87,7 +87,7 @@ function UserDataInput({ onUserInput }) {
     };
 
     return (
-        <div>
+        <div className="center-container">
             <h2>Donor/Patient Information</h2>
             <form onSubmit={handleSubmit} className="user-input-form" onKeyDown={handleKeyDown}>
                 <div>
