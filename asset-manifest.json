@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/Blood-Bank-Management-System/static/css/main.9625649c.css",
-    "main.js": "/Blood-Bank-Management-System/static/js/main.102ba87c.js",
+    "main.css": "/Blood-Bank-Management-System/static/css/main.fce87485.css",
+    "main.js": "/Blood-Bank-Management-System/static/js/main.aa5f5c16.js",
     "static/js/787.9e9f4ffd.chunk.js": "/Blood-Bank-Management-System/static/js/787.9e9f4ffd.chunk.js",
     "static/media/spectre.jpg": "/Blood-Bank-Management-System/static/media/spectre.8ec5d3f6e973934aa271.jpg",
+    "static/media/blood_donation.png": "/Blood-Bank-Management-System/static/media/blood_donation.719da16cf0003072dceb.png",
     "index.html": "/Blood-Bank-Management-System/index.html",
-    "main.9625649c.css.map": "/Blood-Bank-Management-System/static/css/main.9625649c.css.map",
-    "main.102ba87c.js.map": "/Blood-Bank-Management-System/static/js/main.102ba87c.js.map",
+    "main.fce87485.css.map": "/Blood-Bank-Management-System/static/css/main.fce87485.css.map",
+    "main.aa5f5c16.js.map": "/Blood-Bank-Management-System/static/js/main.aa5f5c16.js.map",
     "787.9e9f4ffd.chunk.js.map": "/Blood-Bank-Management-System/static/js/787.9e9f4ffd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9625649c.css",
-    "static/js/main.102ba87c.js"
+    "static/css/main.fce87485.css",
+    "static/js/main.aa5f5c16.js"
   ]
 }
