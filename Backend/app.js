@@ -6,8 +6,8 @@ const app = express();
 const port = 3000;
 
 const dbConfig = {
-  user: 's2020015640',
-  password: 'db2023',
+  user: '',
+  password: '',
   connectString: '103.221.254.51:1521/pdbdbms2023.cse.du.ac.bd',
 };
 
